@@ -200,3 +200,19 @@ Internal function to mint a new token with specific ID and slot. which create to
             valueApprovals: new address[](0)
         });       
 ~~~
+
+* _burn()
+
+ This function burns the ERC3525 token with the given `tokenId_`. It removes the token from the ownership of the current owner and updates the token's state to reflect the burn.
+ 
+ ~~~solidity
+function _burn(uint256 tokenId_) public virtual
+~~~
+
+* _burnValue()
+
+This function burns the specified `burnValue_` amount from the ERC3525 token with the given `tokenId_`. It reduces the balance of the token by the burned value, can be used for partial burning of the token's value.
+
+  ~~~solidity
+function _burnValue(uint256 tokenId_, uint256 burnValue_) public virtual
+~~~

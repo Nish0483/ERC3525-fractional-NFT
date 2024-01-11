@@ -189,7 +189,9 @@ function _mintValue(uint256 tokenId_, uint256 value_) public virtual
   
 Internal function to mint a new token with specific ID and slot.
 
-` function __mintToken(address to_, uint256 tokenId_, uint256 slot_) private {
+
+~~~solidity
+ function __mintToken(address to_, uint256 tokenId_, uint256 slot_) private {
         TokenData memory tokenData = TokenData({
             id: tokenId_,
             slot: slot_,
@@ -205,4 +207,4 @@ Internal function to mint a new token with specific ID and slot.
         emit Transfer(address(0), to_, tokenId_);
         emit SlotChanged(tokenId_, 0, slot_);
     } 
-`
+~~~

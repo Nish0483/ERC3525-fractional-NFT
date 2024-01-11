@@ -153,7 +153,16 @@ To understand why we need ERC-3525, here is a comparison with existing token sta
     _afterValueTransfer(address from_, address to_, uint256 fromTokenId_, uint256 toTokenId_, uint256 slot_, uint256 value_)
 
 
+
+
+
+
+
+
 ###
+
+
+
 
 ** _mint(address to_, uint256 slot_, uint256 value_)  :  Internal function to mint a new token with a specific slot and value.
 

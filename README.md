@@ -80,11 +80,15 @@ To understand why we need ERC-3525, here is a comparison with existing token sta
 
 * transferFrom
 
- there are 3 TransfersFrom functions 
+ there are 3 TransfersFrom functions in contract in same name diffrent input parameters
  
-       1 . fractional value from one id to adress.
-       2 . id to id
-       3 . Adress to adress
+       1 . id to adress : 
+       
+          In this process, the target address (to_) doesn't need to own an NFT or have a specific slot. The fractional value is simply moved to a new NFT that is minted for the target address. 
+          The new token has the same slot as the original token. If the target address already has an NFT with the same slot, a new one is minted, and the balance is transferred accordingly.
+          
+       2 . id to id :  fractional tranfer from 1NFT id to another ID which have same slot
+       3 . Adress to adress : This transfers a specified value of the entire NFT balance from one address .slot not considered
 
 
 

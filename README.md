@@ -88,102 +88,91 @@ To understand why we need ERC-3525, here is a comparison with existing token sta
 
 
 
-* safeTransferFrom
-  
-Safely transfers ownership of a specific token from one address to another.
-
-
-* approve(address to_, uint256 tokenId_)
- 
-Approves another address to spend the fractional value of a specific token.
-
-
-* getApproved(uint256 tokenId_)
-
-Returns the address approved to spend the fractional value of a specific token.
-
-
-* setApprovalForAll(address operator_, bool approved_)
-
-Sets or unsets the approval of a specific address to spend the fractional values of all tokens owned by the sender.
-
-
-* isApprovedForAll(address owner_, address operator_)
-
-Returns true if the specific address is approved to spend the fractional values of all tokens owned by the owner.
-
-
-* totalSupply()
-
-Returns the total number of tokens in existence.
-
-
-* tokenByIndex(uint256 index_)
-  
-Returns the token ID at a specific index in the global tokens list.
-
-
-* tokenOfOwnerByIndex(address owner_, uint256 index_)
-
-Returns the token ID at a specific index in the tokens list of a specific owner.
+* safeTransferFrom : Safely transfers ownership of a specific token from one address to another.
 
 
 
-* function _approve(address to_, uint256 tokenId_) public virtual
-
-Internal function to approve another address to spend the fractional value of a specific token. 
+* approve(address to_, uint256 tokenId_) : Approves another address to spend the fractional value of a specific token.
 
 
-* function _approveValue(uint256 tokenId_, address to_, uint256 value_) public virtual
 
-Internal function to approve another address to spend a 'specific' fractional value of a specific token.
+* getApproved(uint256 tokenId_)  : Returns the address approved to spend the fractional value of a specific token.
+
+
+
+* setApprovalForAll(address operator_, bool approved_) : Sets or unsets the approval of a specific address to spend the fractional values of all tokens owned by the sender.
+
+
+
+* isApprovedForAll(address owner_, address operator_) : Returns true if the specific address is approved to spend the fractional values of all tokens owned by the owner.
+
+
+
+* totalSupply()  : Returns the total number of tokens in existence.
+
+
+
+* tokenByIndex(uint256 index_) : Returns the token ID at a specific index in the global tokens list.
+
+
+
+* tokenOfOwnerByIndex(address owner_, uint256 index_) : Returns the token ID at a specific index in the tokens list of a specific owner.
+
+
+
+
+
+* function _approve(address to_, uint256 tokenId_)  : Internal function to approve another address to spend the fractional value of a specific token. 
+
+
+* function _approveValue(uint256 tokenId_, address to_, uint256 value_) : Internal function to approve another address to spend a 'specific' fractional value of a specific token.
 
   
-* _clearApprovedValues(uint256 tokenId_)
-
-Internal function to clear all approved values for a specific token.
+* _clearApprovedValues(uint256 tokenId_) : Internal function to clear all approved values for a specific token.
 
 
 
-* _existApproveValue(address to_, uint256 tokenId_)
-
-Internal function to check if a specific address is approved to spend a specific fractional value of a token.
+* _existApproveValue(address to_, uint256 tokenId_) : Internal function to check if a specific address is approved to spend a specific fractional value of a token.
 
 
-* _checkOnERC3525Received(uint256 fromTokenId_, uint256 toTokenId_, uint256 value_, bytes memory data_)
-  
-Internal function to check if the receiving contract supports ERC3525Receiver and invoke its onERC3525Received function.
+* _checkOnERC3525Received(uint256 fromTokenId_, uint256 toTokenId_, uint256 value_, bytes memory data_) : Internal function to check if the receiving contract supports ERC3525Receiver and invoke its onERC3525Received function.
 
 
 
-* _checkOnERC721Received(address from_, address to_, uint256 tokenId_, bytes memory data_)
-Internal function to check if the receiving contract supports ERC721Receiver and invoke its onERC721Received function.
+* _checkOnERC721Received(address from_, address to_, uint256 tokenId_, bytes memory data_) : Internal function to check if the receiving contract supports ERC721Receiver and invoke its onERC721Received function.
+
+
+
 
 ### Hooks
 
-Before Transfer Hooks
-_beforeValueTransfer(address from_, address to_, uint256 fromTokenId_, uint256 toTokenId_, uint256 slot_, uint256 value_)
+    Before Transfer Hooks
+    _beforeValueTransfer(address from_, address to_, uint256 fromTokenId_, uint256 toTokenId_, uint256 slot_, uint256 value_)
+    
+    After Transfer Hooks
+    _afterValueTransfer(address from_, address to_, uint256 fromTokenId_, uint256 toTokenId_, uint256 slot_, uint256 value_)
 
-After Transfer Hooks
-_afterValueTransfer(address from_, address to_, uint256 fromTokenId_, uint256 toTokenId_, uint256 slot_, uint256 value_)
 
 
-* _mint(address to_, uint256 slot_, uint256 value_)
-  
-Internal function to mint a new token with a specific slot and value.
+
+
+* _mint(address to_, uint256 slot_, uint256 value_)  :  Internal function to mint a new token with a specific slot and value.
 
 ~~~
 function _mint(address to_, uint256 slot_, uint256 value_) public virtual returns (uint256 tokenId)
 ~~~
 
 
-* _mintValue(uint256 tokenId_, uint256 value_)
-  
-Internal function to update the fractional value of a specific token.
+
+
+* _mintValue(uint256 tokenId_, uint256 value_) : Internal function to update the fractional value of a specific token.
+
 
 ~~~
 function _mintValue(uint256 tokenId_, uint256 value_) public virtual
 ~~~
+
+
 
 * _mintToken(address to_, uint256 tokenId_, uint256 slot_)
   

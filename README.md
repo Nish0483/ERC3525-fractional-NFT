@@ -4,11 +4,11 @@ EIP-3525 is a token standard for semi-fungible tokens. It is the first standard 
 
 ERC-3525 extends the structure of ERC-721. Besides having tokenIds which differentiate each token, ERC-3525 introduces two new values — slot and value. All three attributions enable quantitive operations like dividing, combining, transferring, and comparing NFTs within the same slot.
 
-** tokenId: from ERC-721, represents the nature of non-fungible tokens.
+* tokenId: from ERC-721, represents the nature of non-fungible tokens.
 
-** slot: an attribute that is attached to each token, the same slot represents the same token attributions, allowing tokens with different tokenIds to be identified as identical. For example, if two bonds have the same issuance date, maturity date, and interest rate, then they will be assigned the same slot. So the two bonds can be divided or combined like one.
+* slot: an attribute that is attached to each token, the same slot represents the same token attributions, allowing tokens with different tokenIds to be identified as identical. For example, if two bonds have the same issuance date, maturity date, and interest rate, then they will be assigned the same slot. So the two bonds can be divided or combined like one.
 
-** value: the amount of the assets. For example, a $100 bond can be divided into two $50 bonds. 100 and 50 can represent the value of the assets being held.
+* value: the amount of the assets. For example, a $100 bond can be divided into two $50 bonds. 100 and 50 can represent the value of the assets being held.
 The <ID, SLOT, VALUE> design allows quantitive operations like dividing, combining, transferring, and comparing the tokens within the same slot attribute. It is worth noting that ERC-3525 has backwards compatibility with ERC-721, which means ERC-3525 tokens can be used in all the infra that support ERC-721, and developers can switch to ERC-3525 without additional development.
 
 ### Why We Need ERC-3525

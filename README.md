@@ -153,10 +153,9 @@ To understand why we need ERC-3525, here is a comparison with existing token sta
     _afterValueTransfer(address from_, address to_, uint256 fromTokenId_, uint256 toTokenId_, uint256 slot_, uint256 value_)
 
 
+###
 
-
-
-* _mint(address to_, uint256 slot_, uint256 value_)  :  Internal function to mint a new token with a specific slot and value.
+** _mint(address to_, uint256 slot_, uint256 value_)  :  Internal function to mint a new token with a specific slot and value.
 
 ~~~
 function _mint(address to_, uint256 slot_, uint256 value_) public virtual returns (uint256 tokenId)
@@ -164,8 +163,7 @@ function _mint(address to_, uint256 slot_, uint256 value_) public virtual return
 
 
 
-
-* _mintValue(uint256 tokenId_, uint256 value_) : Internal function to update the fractional value of a specific token.
+** _mintValue(uint256 tokenId_, uint256 value_) : Internal function to update the fractional value of a specific token.
 
 
 ~~~
@@ -174,6 +172,6 @@ function _mintValue(uint256 tokenId_, uint256 value_) public virtual
 
 
 
-* _mintToken(address to_, uint256 tokenId_, uint256 slot_)
+** _mintToken(address to_, uint256 tokenId_, uint256 slot_)
   
 Internal function to mint a new token with specific ID and slot.

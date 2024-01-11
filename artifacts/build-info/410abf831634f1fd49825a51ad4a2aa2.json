@@ -1,0 +1,1489 @@
+{
+	"id": "410abf831634f1fd49825a51ad4a2aa2",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.0",
+	"solcLongVersion": "0.8.0+commit.c7dfd78e",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"z.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity 0.8.0;\r\n\r\n/**\r\n * @title ERC-3525 Semi-Fungible Token Standard\r\n * Note: the ERC-165 identifier for this interface is 0xd5358140.\r\n */\r\ninterface IERC3525 /* is IERC165, IERC721 */ {\r\n    /**\r\n     * @dev MUST emit when value of a token is transferred to another token with the same slot,\r\n     *  including zero value transfers (_value == 0) as well as transfers when tokens are created\r\n     *  (`_fromTokenId` == 0) or destroyed (`_toTokenId` == 0).\r\n     * @param _fromTokenId The token id to transfer value from\r\n     * @param _toTokenId The token id to transfer value to\r\n     * @param _value The transferred value\r\n     */\r\n    event TransferValue(uint256 indexed _fromTokenId, uint256 indexed _toTokenId, uint256 _value);\r\n\r\n    /**\r\n     * @dev MUST emit when the approval value of a token is set or changed.\r\n     * @param _tokenId The token to approve\r\n     * @param _operator The operator to approve for\r\n     * @param _value The maximum value that `_operator` is allowed to manage\r\n     */\r\n    event ApprovalValue(uint256 indexed _tokenId, address indexed _operator, uint256 _value);\r\n    \r\n    /**\r\n     * @dev MUST emit when the slot of a token is set or changed.\r\n     * @param _tokenId The token of which slot is set or changed\r\n     * @param _oldSlot The previous slot of the token\r\n     * @param _newSlot The updated slot of the token\r\n     */ \r\n    event SlotChanged(uint256 indexed _tokenId, uint256 indexed _oldSlot, uint256 indexed _newSlot);\r\n\r\n    /**\r\n     * @notice Get the number of decimals the token uses for value - e.g. 6, means the user\r\n     *  representation of the value of a token can be calculated by dividing it by 1,000,000.\r\n     *  Considering the compatibility with third-party wallets, this function is defined as\r\n     *  `valueDecimals()` instead of `decimals()` to avoid conflict with ERC-20 tokens.\r\n     * @return The number of decimals for value\r\n     */\r\n    function valueDecimals() external view returns (uint8);\r\n\r\n    /**\r\n     * @notice Get the value of a token.\r\n     * @param _tokenId The token for which to query the balance\r\n     * @return The value of `_tokenId`\r\n     */\r\n    function balanceOf(uint256 _tokenId) external view returns (uint256);\r\n\r\n    /**\r\n     * @notice Get the slot of a token.\r\n     * @param _tokenId The identifier for a token\r\n     * @return The slot of the token\r\n     */\r\n    function slotOf(uint256 _tokenId) external view returns (uint256);\r\n\r\n    /**\r\n     * @notice Allow an operator to manage the value of a token, up to the `_value`.\r\n     * @dev MUST revert unless caller is the current owner, an authorized operator, or the approved\r\n     *  address for `_tokenId`.\r\n     *  MUST emit the ApprovalValue event.\r\n     * @param _tokenId The token to approve\r\n     * @param _operator The operator to be approved\r\n     * @param _value The maximum value of `_toTokenId` that `_operator` is allowed to manage\r\n     */\r\n    function approve(\r\n        uint256 _tokenId,\r\n        address _operator,\r\n        uint256 _value\r\n    ) external payable;\r\n\r\n    /**\r\n     * @notice Get the maximum value of a token that an operator is allowed to manage.\r\n     * @param _tokenId The token for which to query the allowance\r\n     * @param _operator The address of an operator\r\n     * @return The current approval value of `_tokenId` that `_operator` is allowed to manage\r\n     */\r\n    function allowance(uint256 _tokenId, address _operator) external view returns (uint256);\r\n\r\n    /**\r\n     * @notice Transfer value from a specified token to another specified token with the same slot.\r\n     * @dev Caller MUST be the current owner, an authorized operator or an operator who has been\r\n     *  approved the whole `_fromTokenId` or part of it.\r\n     *  MUST revert if `_fromTokenId` or `_toTokenId` is zero token id or does not exist.\r\n     *  MUST revert if slots of `_fromTokenId` and `_toTokenId` do not match.\r\n     *  MUST revert if `_value` exceeds the balance of `_fromTokenId` or its allowance to the\r\n     *  operator.\r\n     *  MUST emit `TransferValue` event.\r\n     * @param _fromTokenId The token to transfer value from\r\n     * @param _toTokenId The token to transfer value to\r\n     * @param _value The transferred value\r\n     */\r\n    function transferFrom(\r\n        uint256 _fromTokenId,\r\n        uint256 _toTokenId,\r\n        uint256 _value\r\n    ) external payable;\r\n\r\n\r\n    /**\r\n     * @notice Transfer value from a specified token to an address. The caller should confirm that\r\n     *  `_to` is capable of receiving ERC-3525 tokens.\r\n     * @dev This function MUST create a new ERC-3525 token with the same slot for `_to`, \r\n     *  or find an existing token with the same slot owned by `_to`, to receive the transferred value.\r\n     *  MUST revert if `_fromTokenId` is zero token id or does not exist.\r\n     *  MUST revert if `_to` is zero address.\r\n     *  MUST revert if `_value` exceeds the balance of `_fromTokenId` or its allowance to the\r\n     *  operator.\r\n     *  MUST emit `Transfer` and `TransferValue` events.\r\n     * @param _fromTokenId The token to transfer value from\r\n     * @param _to The address to transfer value to\r\n     * @param _value The transferred value\r\n     * @return ID of the token which receives the transferred value\r\n     */\r\n    function transferFrom(\r\n        uint256 _fromTokenId,\r\n        address _to,\r\n        uint256 _value\r\n    ) external payable returns (uint256);\r\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"contracts": {
+			"z.sol": {
+				"IERC3525": {
+					"abi": [
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "_tokenId",
+									"type": "uint256"
+								},
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "_operator",
+									"type": "address"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "_value",
+									"type": "uint256"
+								}
+							],
+							"name": "ApprovalValue",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "_tokenId",
+									"type": "uint256"
+								},
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "_oldSlot",
+									"type": "uint256"
+								},
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "_newSlot",
+									"type": "uint256"
+								}
+							],
+							"name": "SlotChanged",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "_fromTokenId",
+									"type": "uint256"
+								},
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "_toTokenId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "_value",
+									"type": "uint256"
+								}
+							],
+							"name": "TransferValue",
+							"type": "event"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_tokenId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "address",
+									"name": "_operator",
+									"type": "address"
+								}
+							],
+							"name": "allowance",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_tokenId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "address",
+									"name": "_operator",
+									"type": "address"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_value",
+									"type": "uint256"
+								}
+							],
+							"name": "approve",
+							"outputs": [],
+							"stateMutability": "payable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_tokenId",
+									"type": "uint256"
+								}
+							],
+							"name": "balanceOf",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_tokenId",
+									"type": "uint256"
+								}
+							],
+							"name": "slotOf",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_fromTokenId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "address",
+									"name": "_to",
+									"type": "address"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_value",
+									"type": "uint256"
+								}
+							],
+							"name": "transferFrom",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "payable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_fromTokenId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_toTokenId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_value",
+									"type": "uint256"
+								}
+							],
+							"name": "transferFrom",
+							"outputs": [],
+							"stateMutability": "payable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "valueDecimals",
+							"outputs": [
+								{
+									"internalType": "uint8",
+									"name": "",
+									"type": "uint8"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"events": {
+							"ApprovalValue(uint256,address,uint256)": {
+								"details": "MUST emit when the approval value of a token is set or changed.",
+								"params": {
+									"_operator": "The operator to approve for",
+									"_tokenId": "The token to approve",
+									"_value": "The maximum value that `_operator` is allowed to manage"
+								}
+							},
+							"SlotChanged(uint256,uint256,uint256)": {
+								"details": "MUST emit when the slot of a token is set or changed.",
+								"params": {
+									"_newSlot": "The updated slot of the token",
+									"_oldSlot": "The previous slot of the token",
+									"_tokenId": "The token of which slot is set or changed"
+								}
+							},
+							"TransferValue(uint256,uint256,uint256)": {
+								"details": "MUST emit when value of a token is transferred to another token with the same slot,  including zero value transfers (_value == 0) as well as transfers when tokens are created  (`_fromTokenId` == 0) or destroyed (`_toTokenId` == 0).",
+								"params": {
+									"_fromTokenId": "The token id to transfer value from",
+									"_toTokenId": "The token id to transfer value to",
+									"_value": "The transferred value"
+								}
+							}
+						},
+						"kind": "dev",
+						"methods": {
+							"allowance(uint256,address)": {
+								"params": {
+									"_operator": "The address of an operator",
+									"_tokenId": "The token for which to query the allowance"
+								},
+								"returns": {
+									"_0": "The current approval value of `_tokenId` that `_operator` is allowed to manage"
+								}
+							},
+							"approve(uint256,address,uint256)": {
+								"details": "MUST revert unless caller is the current owner, an authorized operator, or the approved  address for `_tokenId`.  MUST emit the ApprovalValue event.",
+								"params": {
+									"_operator": "The operator to be approved",
+									"_tokenId": "The token to approve",
+									"_value": "The maximum value of `_toTokenId` that `_operator` is allowed to manage"
+								}
+							},
+							"balanceOf(uint256)": {
+								"params": {
+									"_tokenId": "The token for which to query the balance"
+								},
+								"returns": {
+									"_0": "The value of `_tokenId`"
+								}
+							},
+							"slotOf(uint256)": {
+								"params": {
+									"_tokenId": "The identifier for a token"
+								},
+								"returns": {
+									"_0": "The slot of the token"
+								}
+							},
+							"transferFrom(uint256,address,uint256)": {
+								"details": "This function MUST create a new ERC-3525 token with the same slot for `_to`,   or find an existing token with the same slot owned by `_to`, to receive the transferred value.  MUST revert if `_fromTokenId` is zero token id or does not exist.  MUST revert if `_to` is zero address.  MUST revert if `_value` exceeds the balance of `_fromTokenId` or its allowance to the  operator.  MUST emit `Transfer` and `TransferValue` events.",
+								"params": {
+									"_fromTokenId": "The token to transfer value from",
+									"_to": "The address to transfer value to",
+									"_value": "The transferred value"
+								},
+								"returns": {
+									"_0": "ID of the token which receives the transferred value"
+								}
+							},
+							"transferFrom(uint256,uint256,uint256)": {
+								"details": "Caller MUST be the current owner, an authorized operator or an operator who has been  approved the whole `_fromTokenId` or part of it.  MUST revert if `_fromTokenId` or `_toTokenId` is zero token id or does not exist.  MUST revert if slots of `_fromTokenId` and `_toTokenId` do not match.  MUST revert if `_value` exceeds the balance of `_fromTokenId` or its allowance to the  operator.  MUST emit `TransferValue` event.",
+								"params": {
+									"_fromTokenId": "The token to transfer value from",
+									"_toTokenId": "The token to transfer value to",
+									"_value": "The transferred value"
+								}
+							},
+							"valueDecimals()": {
+								"returns": {
+									"_0": "The number of decimals for value"
+								}
+							}
+						},
+						"title": "ERC-3525 Semi-Fungible Token Standard Note: the ERC-165 identifier for this interface is 0xd5358140.",
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"allowance(uint256,address)": "e345e0bc",
+							"approve(uint256,address,uint256)": "8cb0a511",
+							"balanceOf(uint256)": "9cc7f708",
+							"slotOf(uint256)": "263f3e7e",
+							"transferFrom(uint256,address,uint256)": "0f485c02",
+							"transferFrom(uint256,uint256,uint256)": "310ed7f0",
+							"valueDecimals()": "3e7e8669"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"ApprovalValue\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"_oldSlot\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"_newSlot\",\"type\":\"uint256\"}],\"name\":\"SlotChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"_fromTokenId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"_toTokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"TransferValue\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_operator\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_operator\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"slotOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_fromTokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_fromTokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_toTokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"valueDecimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"events\":{\"ApprovalValue(uint256,address,uint256)\":{\"details\":\"MUST emit when the approval value of a token is set or changed.\",\"params\":{\"_operator\":\"The operator to approve for\",\"_tokenId\":\"The token to approve\",\"_value\":\"The maximum value that `_operator` is allowed to manage\"}},\"SlotChanged(uint256,uint256,uint256)\":{\"details\":\"MUST emit when the slot of a token is set or changed.\",\"params\":{\"_newSlot\":\"The updated slot of the token\",\"_oldSlot\":\"The previous slot of the token\",\"_tokenId\":\"The token of which slot is set or changed\"}},\"TransferValue(uint256,uint256,uint256)\":{\"details\":\"MUST emit when value of a token is transferred to another token with the same slot,  including zero value transfers (_value == 0) as well as transfers when tokens are created  (`_fromTokenId` == 0) or destroyed (`_toTokenId` == 0).\",\"params\":{\"_fromTokenId\":\"The token id to transfer value from\",\"_toTokenId\":\"The token id to transfer value to\",\"_value\":\"The transferred value\"}}},\"kind\":\"dev\",\"methods\":{\"allowance(uint256,address)\":{\"params\":{\"_operator\":\"The address of an operator\",\"_tokenId\":\"The token for which to query the allowance\"},\"returns\":{\"_0\":\"The current approval value of `_tokenId` that `_operator` is allowed to manage\"}},\"approve(uint256,address,uint256)\":{\"details\":\"MUST revert unless caller is the current owner, an authorized operator, or the approved  address for `_tokenId`.  MUST emit the ApprovalValue event.\",\"params\":{\"_operator\":\"The operator to be approved\",\"_tokenId\":\"The token to approve\",\"_value\":\"The maximum value of `_toTokenId` that `_operator` is allowed to manage\"}},\"balanceOf(uint256)\":{\"params\":{\"_tokenId\":\"The token for which to query the balance\"},\"returns\":{\"_0\":\"The value of `_tokenId`\"}},\"slotOf(uint256)\":{\"params\":{\"_tokenId\":\"The identifier for a token\"},\"returns\":{\"_0\":\"The slot of the token\"}},\"transferFrom(uint256,address,uint256)\":{\"details\":\"This function MUST create a new ERC-3525 token with the same slot for `_to`,   or find an existing token with the same slot owned by `_to`, to receive the transferred value.  MUST revert if `_fromTokenId` is zero token id or does not exist.  MUST revert if `_to` is zero address.  MUST revert if `_value` exceeds the balance of `_fromTokenId` or its allowance to the  operator.  MUST emit `Transfer` and `TransferValue` events.\",\"params\":{\"_fromTokenId\":\"The token to transfer value from\",\"_to\":\"The address to transfer value to\",\"_value\":\"The transferred value\"},\"returns\":{\"_0\":\"ID of the token which receives the transferred value\"}},\"transferFrom(uint256,uint256,uint256)\":{\"details\":\"Caller MUST be the current owner, an authorized operator or an operator who has been  approved the whole `_fromTokenId` or part of it.  MUST revert if `_fromTokenId` or `_toTokenId` is zero token id or does not exist.  MUST revert if slots of `_fromTokenId` and `_toTokenId` do not match.  MUST revert if `_value` exceeds the balance of `_fromTokenId` or its allowance to the  operator.  MUST emit `TransferValue` event.\",\"params\":{\"_fromTokenId\":\"The token to transfer value from\",\"_toTokenId\":\"The token to transfer value to\",\"_value\":\"The transferred value\"}},\"valueDecimals()\":{\"returns\":{\"_0\":\"The number of decimals for value\"}}},\"title\":\"ERC-3525 Semi-Fungible Token Standard Note: the ERC-165 identifier for this interface is 0xd5358140.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"allowance(uint256,address)\":{\"notice\":\"Get the maximum value of a token that an operator is allowed to manage.\"},\"approve(uint256,address,uint256)\":{\"notice\":\"Allow an operator to manage the value of a token, up to the `_value`.\"},\"balanceOf(uint256)\":{\"notice\":\"Get the value of a token.\"},\"slotOf(uint256)\":{\"notice\":\"Get the slot of a token.\"},\"transferFrom(uint256,address,uint256)\":{\"notice\":\"Transfer value from a specified token to an address. The caller should confirm that  `_to` is capable of receiving ERC-3525 tokens.\"},\"transferFrom(uint256,uint256,uint256)\":{\"notice\":\"Transfer value from a specified token to another specified token with the same slot.\"},\"valueDecimals()\":{\"notice\":\"Get the number of decimals the token uses for value - e.g. 6, means the user  representation of the value of a token can be calculated by dividing it by 1,000,000.  Considering the compatibility with third-party wallets, this function is defined as  `valueDecimals()` instead of `decimals()` to avoid conflict with ERC-20 tokens.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"z.sol\":\"IERC3525\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"z.sol\":{\"keccak256\":\"0x97fa5d4c1e1fed2b048e6081d3e3aa6b2c60cd2fa82f79d74ac687b5e96afd4a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ffb5198faec4a658a2c4fbb9cbd66b3dbddbb31dd264741d0543c61c63b5ac6c\",\"dweb:/ipfs/QmXBEDiUqdMtemxgefpd36hFP1MZcoH7RWYhKJVg1Su85j\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {
+							"allowance(uint256,address)": {
+								"notice": "Get the maximum value of a token that an operator is allowed to manage."
+							},
+							"approve(uint256,address,uint256)": {
+								"notice": "Allow an operator to manage the value of a token, up to the `_value`."
+							},
+							"balanceOf(uint256)": {
+								"notice": "Get the value of a token."
+							},
+							"slotOf(uint256)": {
+								"notice": "Get the slot of a token."
+							},
+							"transferFrom(uint256,address,uint256)": {
+								"notice": "Transfer value from a specified token to an address. The caller should confirm that  `_to` is capable of receiving ERC-3525 tokens."
+							},
+							"transferFrom(uint256,uint256,uint256)": {
+								"notice": "Transfer value from a specified token to another specified token with the same slot."
+							},
+							"valueDecimals()": {
+								"notice": "Get the number of decimals the token uses for value - e.g. 6, means the user  representation of the value of a token can be calculated by dividing it by 1,000,000.  Considering the compatibility with third-party wallets, this function is defined as  `valueDecimals()` instead of `decimals()` to avoid conflict with ERC-20 tokens."
+							}
+						},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"z.sol": {
+				"ast": {
+					"absolutePath": "z.sol",
+					"exportedSymbols": {
+						"IERC3525": [
+							94
+						]
+					},
+					"id": 95,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"0.8",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:22:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"documentation": {
+								"id": 2,
+								"nodeType": "StructuredDocumentation",
+								"src": "59:124:0",
+								"text": " @title ERC-3525 Semi-Fungible Token Standard\n Note: the ERC-165 identifier for this interface is 0xd5358140."
+							},
+							"fullyImplemented": false,
+							"id": 94,
+							"linearizedBaseContracts": [
+								94
+							],
+							"name": "IERC3525",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 3,
+										"nodeType": "StructuredDocumentation",
+										"src": "237:441:0",
+										"text": " @dev MUST emit when value of a token is transferred to another token with the same slot,\n  including zero value transfers (_value == 0) as well as transfers when tokens are created\n  (`_fromTokenId` == 0) or destroyed (`_toTokenId` == 0).\n @param _fromTokenId The token id to transfer value from\n @param _toTokenId The token id to transfer value to\n @param _value The transferred value"
+									},
+									"id": 11,
+									"name": "TransferValue",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 10,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 5,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_fromTokenId",
+												"nodeType": "VariableDeclaration",
+												"scope": 11,
+												"src": "704:28:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 4,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "704:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 7,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_toTokenId",
+												"nodeType": "VariableDeclaration",
+												"scope": 11,
+												"src": "734:26:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 6,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "734:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 9,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "_value",
+												"nodeType": "VariableDeclaration",
+												"scope": 11,
+												"src": "762:14:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 8,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "762:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "703:74:0"
+									},
+									"src": "684:94:0"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 12,
+										"nodeType": "StructuredDocumentation",
+										"src": "786:265:0",
+										"text": " @dev MUST emit when the approval value of a token is set or changed.\n @param _tokenId The token to approve\n @param _operator The operator to approve for\n @param _value The maximum value that `_operator` is allowed to manage"
+									},
+									"id": 20,
+									"name": "ApprovalValue",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 19,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 14,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_tokenId",
+												"nodeType": "VariableDeclaration",
+												"scope": 20,
+												"src": "1077:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 13,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1077:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 16,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_operator",
+												"nodeType": "VariableDeclaration",
+												"scope": 20,
+												"src": "1103:25:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 15,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "1103:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 18,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "_value",
+												"nodeType": "VariableDeclaration",
+												"scope": 20,
+												"src": "1130:14:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 17,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1130:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1076:69:0"
+									},
+									"src": "1057:89:0"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 21,
+										"nodeType": "StructuredDocumentation",
+										"src": "1158:254:0",
+										"text": " @dev MUST emit when the slot of a token is set or changed.\n @param _tokenId The token of which slot is set or changed\n @param _oldSlot The previous slot of the token\n @param _newSlot The updated slot of the token"
+									},
+									"id": 29,
+									"name": "SlotChanged",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 28,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 23,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_tokenId",
+												"nodeType": "VariableDeclaration",
+												"scope": 29,
+												"src": "1437:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 22,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1437:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 25,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_oldSlot",
+												"nodeType": "VariableDeclaration",
+												"scope": 29,
+												"src": "1463:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 24,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1463:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 27,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "_newSlot",
+												"nodeType": "VariableDeclaration",
+												"scope": 29,
+												"src": "1489:24:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 26,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1489:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1436:78:0"
+									},
+									"src": "1419:96:0"
+								},
+								{
+									"documentation": {
+										"id": 30,
+										"nodeType": "StructuredDocumentation",
+										"src": "1523:431:0",
+										"text": " @notice Get the number of decimals the token uses for value - e.g. 6, means the user\n  representation of the value of a token can be calculated by dividing it by 1,000,000.\n  Considering the compatibility with third-party wallets, this function is defined as\n  `valueDecimals()` instead of `decimals()` to avoid conflict with ERC-20 tokens.\n @return The number of decimals for value"
+									},
+									"functionSelector": "3e7e8669",
+									"id": 35,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "valueDecimals",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 31,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1982:2:0"
+									},
+									"returnParameters": {
+										"id": 34,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 33,
+												"mutability": "mutable",
+												"name": "",
+												"nodeType": "VariableDeclaration",
+												"scope": 35,
+												"src": "2008:5:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint8",
+													"typeString": "uint8"
+												},
+												"typeName": {
+													"id": 32,
+													"name": "uint8",
+													"nodeType": "ElementaryTypeName",
+													"src": "2008:5:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint8",
+														"typeString": "uint8"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2007:7:0"
+									},
+									"scope": 94,
+									"src": "1960:55:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 36,
+										"nodeType": "StructuredDocumentation",
+										"src": "2023:159:0",
+										"text": " @notice Get the value of a token.\n @param _tokenId The token for which to query the balance\n @return The value of `_tokenId`"
+									},
+									"functionSelector": "9cc7f708",
+									"id": 43,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "balanceOf",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 39,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 38,
+												"mutability": "mutable",
+												"name": "_tokenId",
+												"nodeType": "VariableDeclaration",
+												"scope": 43,
+												"src": "2207:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 37,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2207:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2206:18:0"
+									},
+									"returnParameters": {
+										"id": 42,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 41,
+												"mutability": "mutable",
+												"name": "",
+												"nodeType": "VariableDeclaration",
+												"scope": 43,
+												"src": "2248:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 40,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2248:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2247:9:0"
+									},
+									"scope": 94,
+									"src": "2188:69:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 44,
+										"nodeType": "StructuredDocumentation",
+										"src": "2265:142:0",
+										"text": " @notice Get the slot of a token.\n @param _tokenId The identifier for a token\n @return The slot of the token"
+									},
+									"functionSelector": "263f3e7e",
+									"id": 51,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "slotOf",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 47,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 46,
+												"mutability": "mutable",
+												"name": "_tokenId",
+												"nodeType": "VariableDeclaration",
+												"scope": 51,
+												"src": "2429:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 45,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2429:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2428:18:0"
+									},
+									"returnParameters": {
+										"id": 50,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 49,
+												"mutability": "mutable",
+												"name": "",
+												"nodeType": "VariableDeclaration",
+												"scope": 51,
+												"src": "2470:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 48,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2470:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2469:9:0"
+									},
+									"scope": 94,
+									"src": "2413:66:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 52,
+										"nodeType": "StructuredDocumentation",
+										"src": "2487:468:0",
+										"text": " @notice Allow an operator to manage the value of a token, up to the `_value`.\n @dev MUST revert unless caller is the current owner, an authorized operator, or the approved\n  address for `_tokenId`.\n  MUST emit the ApprovalValue event.\n @param _tokenId The token to approve\n @param _operator The operator to be approved\n @param _value The maximum value of `_toTokenId` that `_operator` is allowed to manage"
+									},
+									"functionSelector": "8cb0a511",
+									"id": 61,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "approve",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 59,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 54,
+												"mutability": "mutable",
+												"name": "_tokenId",
+												"nodeType": "VariableDeclaration",
+												"scope": 61,
+												"src": "2988:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 53,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2988:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 56,
+												"mutability": "mutable",
+												"name": "_operator",
+												"nodeType": "VariableDeclaration",
+												"scope": 61,
+												"src": "3015:17:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 55,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "3015:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 58,
+												"mutability": "mutable",
+												"name": "_value",
+												"nodeType": "VariableDeclaration",
+												"scope": 61,
+												"src": "3043:14:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 57,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3043:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2977:87:0"
+									},
+									"returnParameters": {
+										"id": 60,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "3081:0:0"
+									},
+									"scope": 94,
+									"src": "2961:121:0",
+									"stateMutability": "payable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 62,
+										"nodeType": "StructuredDocumentation",
+										"src": "3090:314:0",
+										"text": " @notice Get the maximum value of a token that an operator is allowed to manage.\n @param _tokenId The token for which to query the allowance\n @param _operator The address of an operator\n @return The current approval value of `_tokenId` that `_operator` is allowed to manage"
+									},
+									"functionSelector": "e345e0bc",
+									"id": 71,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "allowance",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 67,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 64,
+												"mutability": "mutable",
+												"name": "_tokenId",
+												"nodeType": "VariableDeclaration",
+												"scope": 71,
+												"src": "3429:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 63,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3429:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 66,
+												"mutability": "mutable",
+												"name": "_operator",
+												"nodeType": "VariableDeclaration",
+												"scope": 71,
+												"src": "3447:17:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 65,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "3447:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3428:37:0"
+									},
+									"returnParameters": {
+										"id": 70,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 69,
+												"mutability": "mutable",
+												"name": "",
+												"nodeType": "VariableDeclaration",
+												"scope": 71,
+												"src": "3489:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 68,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3489:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3488:9:0"
+									},
+									"scope": 94,
+									"src": "3410:88:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 72,
+										"nodeType": "StructuredDocumentation",
+										"src": "3506:757:0",
+										"text": " @notice Transfer value from a specified token to another specified token with the same slot.\n @dev Caller MUST be the current owner, an authorized operator or an operator who has been\n  approved the whole `_fromTokenId` or part of it.\n  MUST revert if `_fromTokenId` or `_toTokenId` is zero token id or does not exist.\n  MUST revert if slots of `_fromTokenId` and `_toTokenId` do not match.\n  MUST revert if `_value` exceeds the balance of `_fromTokenId` or its allowance to the\n  operator.\n  MUST emit `TransferValue` event.\n @param _fromTokenId The token to transfer value from\n @param _toTokenId The token to transfer value to\n @param _value The transferred value"
+									},
+									"functionSelector": "310ed7f0",
+									"id": 81,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "transferFrom",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 79,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 74,
+												"mutability": "mutable",
+												"name": "_fromTokenId",
+												"nodeType": "VariableDeclaration",
+												"scope": 81,
+												"src": "4301:20:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 73,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "4301:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 76,
+												"mutability": "mutable",
+												"name": "_toTokenId",
+												"nodeType": "VariableDeclaration",
+												"scope": 81,
+												"src": "4332:18:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 75,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "4332:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 78,
+												"mutability": "mutable",
+												"name": "_value",
+												"nodeType": "VariableDeclaration",
+												"scope": 81,
+												"src": "4361:14:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 77,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "4361:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "4290:92:0"
+									},
+									"returnParameters": {
+										"id": 80,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "4399:0:0"
+									},
+									"scope": 94,
+									"src": "4269:131:0",
+									"stateMutability": "payable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 82,
+										"nodeType": "StructuredDocumentation",
+										"src": "4410:883:0",
+										"text": " @notice Transfer value from a specified token to an address. The caller should confirm that\n  `_to` is capable of receiving ERC-3525 tokens.\n @dev This function MUST create a new ERC-3525 token with the same slot for `_to`, \n  or find an existing token with the same slot owned by `_to`, to receive the transferred value.\n  MUST revert if `_fromTokenId` is zero token id or does not exist.\n  MUST revert if `_to` is zero address.\n  MUST revert if `_value` exceeds the balance of `_fromTokenId` or its allowance to the\n  operator.\n  MUST emit `Transfer` and `TransferValue` events.\n @param _fromTokenId The token to transfer value from\n @param _to The address to transfer value to\n @param _value The transferred value\n @return ID of the token which receives the transferred value"
+									},
+									"functionSelector": "0f485c02",
+									"id": 93,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "transferFrom",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 89,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 84,
+												"mutability": "mutable",
+												"name": "_fromTokenId",
+												"nodeType": "VariableDeclaration",
+												"scope": 93,
+												"src": "5331:20:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 83,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "5331:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 86,
+												"mutability": "mutable",
+												"name": "_to",
+												"nodeType": "VariableDeclaration",
+												"scope": 93,
+												"src": "5362:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 85,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "5362:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 88,
+												"mutability": "mutable",
+												"name": "_value",
+												"nodeType": "VariableDeclaration",
+												"scope": 93,
+												"src": "5384:14:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 87,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "5384:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "5320:85:0"
+									},
+									"returnParameters": {
+										"id": 92,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 91,
+												"mutability": "mutable",
+												"name": "",
+												"nodeType": "VariableDeclaration",
+												"scope": 93,
+												"src": "5432:7:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 90,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "5432:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "5431:9:0"
+									},
+									"scope": 94,
+									"src": "5299:142:0",
+									"stateMutability": "payable",
+									"virtual": false,
+									"visibility": "external"
+								}
+							],
+							"scope": 95,
+							"src": "185:5259:0"
+						}
+					],
+					"src": "33:5411:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

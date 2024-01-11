@@ -1,0 +1,474 @@
+{
+	"compiler": {
+		"version": "0.8.20+commit.a1b79de6"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "symbol",
+						"type": "string"
+					},
+					{
+						"internalType": "uint8",
+						"name": "decimals",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "callBalanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "callBurn",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "burnValue",
+						"type": "uint256"
+					}
+				],
+				"name": "callBurnValue",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "fromTokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "callCreateDerivedTokenId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "slot",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "callMint",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "callMintValue",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "callOwnerOf",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "callSafeTransferTokenId",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "callSetApprovalForAll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "metadataDescriptor",
+						"type": "address"
+					}
+				],
+				"name": "callSetMetadataDescriptor",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "callSlotOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "callTransferTokenId",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "operator_",
+						"type": "address"
+					}
+				],
+				"name": "chckAllowance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "allowance",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "erc3525",
+				"outputs": [
+					{
+						"internalType": "contract ERC3525",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "testAprove",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/test.sol": "ERC3525Caller"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+			]
+		},
+		"@openzeppelin/contracts/utils/Strings.sol": {
+			"keccak256": "0x55f102ea785d8399c0e58d1108e2d289506dde18abc6db1b7f68c1f9f9bc5792",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6e52e0a7765c943ef14e5bcf11e46e6139fa044be564881378349236bf2e3453",
+				"dweb:/ipfs/QmZEeeXoFPW47amyP35gfzomF9DixqqTEPwzBakv6cZw6i"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x4296879f55019b23e135000eb36896057e7101fb7fb859c5ef690cf14643757b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://87b3541437c8c443ccd36795e56a338ed12855eec17f8da624511b8d1a7e14df",
+				"dweb:/ipfs/QmeJQCtZrQjtJLr6u7ZHWeH3pBnjtLWzvRrKViAi7UZqxL"
+			]
+		},
+		"@openzeppelin/contracts/utils/math/Math.sol": {
+			"keccak256": "0x005ec64c6313f0555d59e278f9a7a5ab2db5bdc72a027f255a37c327af1ec02d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4ece9f0b9c8daca08c76b6b5405a6446b6f73b3a15fab7ff56e296cbd4a2c875",
+				"dweb:/ipfs/QmQyRpyPRL5SQuAgj6SHmbir3foX65FJjbVTTQrA2EFg6L"
+			]
+		},
+		"@openzeppelin/contracts/utils/math/SignedMath.sol": {
+			"keccak256": "0x5f7e4076e175393767754387c962926577f1660dd9b810187b9002407656be72",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7d533a1c97cd43a57cd9c465f7ee8dd0e39ae93a8fb8ff8e5303a356b081cdcc",
+				"dweb:/ipfs/QmVBEei6aTnvYNZp2CHYVNKyZS4q1KkjANfY39WVXZXVoT"
+			]
+		},
+		"contracts/ERC3525.sol": {
+			"keccak256": "0xa2d3938dbbd405e9da731fc9d3a6b4b1953928deb01b1b89373a59165a1e7c84",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c734f12b5a5f1455c27fb368fdbc7df9efdd8f7f8cf06c1add509127a24012cc",
+				"dweb:/ipfs/QmUv6F2hsy9VLtmqc6L1j5NoVVBz2XUWtJmphUaVmAhyBk"
+			]
+		},
+		"contracts/IERC3525.sol": {
+			"keccak256": "0x901207b3c61837eeae24c25271533a0dd684745dad978235053fe4d9d86a9ded",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e4a72b6cd12e5f8eb092a358a919eeb62fd685ecdc9a8ebc6e222845ec6bfbe6",
+				"dweb:/ipfs/QmeFMHVXcMzZ7PBY13m9wPfeuYqah7wyscKfyR4C7MogDZ"
+			]
+		},
+		"contracts/IERC3525Receiver.sol": {
+			"keccak256": "0x786383869053c8390f7d8425750c9d1d2f96ab524374f56b986414271e8b1c9d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8b2fb8260880b4bfd92733e5ae68393f9ca283683e6ae1cb67d5df750ec8e626",
+				"dweb:/ipfs/QmeSokK66DCLeonJbz9qKGRrfS9pAje8VqDJRkoCfGN28M"
+			]
+		},
+		"contracts/IERC721.sol": {
+			"keccak256": "0x3553276ca123c09e0ebc3232afb0452dff1d2841e767e221deffe0633867f5e8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7bed27e2b7297a37d632fe2088796626181824c9148b2893a30b447d87dd7312",
+				"dweb:/ipfs/QmUbLTwJDzopZam1TVqkcWEd4nXmVkwrH2Yb6VTFT4DcTe"
+			]
+		},
+		"contracts/IERC721Receiver.sol": {
+			"keccak256": "0x1b5f60bb2c8e2915ba219bd9916af6328ae8da2ca2daa7e5a6fc674277fb8ab1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3e57afce81697d811c0c81ecaba51c164b6da1fffad3d433cc9e98c5ac8e9b25",
+				"dweb:/ipfs/QmXbTFQ9WVnaxuER54djUyia4pHgw637FJKBh1xKQgRwgi"
+			]
+		},
+		"contracts/extensions/IERC3525Metadata.sol": {
+			"keccak256": "0x73d0c053478063ca4345ccc32e0e069ed14636e8f7dcffd27a3a5d16e5df1015",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e926678863bc58d9267d79687e8d090ecebd348cd313237654f75fead1a6db65",
+				"dweb:/ipfs/QmWnxuw7iq8ikw4uBsKXszpnXcFTSr11DhTRg7MpFrdBB2"
+			]
+		},
+		"contracts/extensions/IERC721Enumerable.sol": {
+			"keccak256": "0x872552c912722ad746f43b91583b921b97943aeaddba573ee6f14ef1eec9e03d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fffddbfa9c3c863a313a2036f44148200a5e87f8f51dbddee8578fac889c828f",
+				"dweb:/ipfs/QmXfhoS6qzqWpWRGoTc2tdCf88MnGX5eCt4nfV2qun7BEY"
+			]
+		},
+		"contracts/extensions/IERC721Metadata.sol": {
+			"keccak256": "0xb3e7cb4572ee9649f15fd17dc3865c8a4a47f92679233cc68e578c36f45ac5e1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b3141ce4e2518b3060e258e6db17d45521fc135776674498bc75b269fc997b82",
+				"dweb:/ipfs/QmTDjiZMXXFtLjn5RLy1abU4ugMDkEC7uzdejDjgGBMHV6"
+			]
+		},
+		"contracts/periphery/interface/IERC3525MetadataDescriptor.sol": {
+			"keccak256": "0xc297d848cece83ff6d6d67e6f884667425445776b3b5c8fd185c4a01a2f79de7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a498945e761792cbf32be30eb8f512b214260a55b56e325c2611e8caa23978bf",
+				"dweb:/ipfs/QmZBr8aqYyyErUqHdGDhyZXyj4RUk2G1fsLfRtwdEC1Wf3"
+			]
+		},
+		"contracts/test.sol": {
+			"keccak256": "0xf9bf69f585cf82b4bd99222efcc2488a72fdb332bf98f3c985ff5be66911e1fd",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c4077cb8b2b39c3c332ccd10bfcc73a1156feb16f059de647fbe5264fecfb864",
+				"dweb:/ipfs/QmXfiTM7WnYfme6tBcWnVrA5CMbuk8vBr388kBYkAsKGRr"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,99 @@
+{
+	"compiler": {
+		"version": "0.8.20+commit.a1b79de6"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_operator",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC721Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Interface for any contract that wants to support safeTransfers from ERC721 asset contracts.  Note: the ERC-165 identifier for this interface is 0x150b7a02.",
+			"kind": "dev",
+			"methods": {
+				"onERC721Received(address,address,uint256,bytes)": {
+					"details": "The ERC721 smart contract calls this function on the recipient  after a `transfer`. This function MAY throw to revert and reject the  transfer. Return of other than the magic value MUST result in the  transaction being reverted.  Note: the contract address is always the message sender.",
+					"params": {
+						"_data": "Additional data with no specified format",
+						"_from": "The address which previously owned the token",
+						"_operator": "The address which called `safeTransferFrom` function",
+						"_tokenId": "The NFT identifier which is being transferred"
+					},
+					"returns": {
+						"_0": "`bytes4(keccak256(\"onERC721Received(address,address,uint256,bytes)\"))`  unless throwing"
+					}
+				}
+			},
+			"title": "ERC721 token receiver interface",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"onERC721Received(address,address,uint256,bytes)": {
+					"notice": "Handle the receipt of an NFT"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/IERC721ReceiverUpgradeable.sol": "IERC721ReceiverUpgradeable"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/IERC721ReceiverUpgradeable.sol": {
+			"keccak256": "0x6cd7a37a4a516941845319f17f08f57d762cb290b85871b5e510875ec964f3e8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://536d7d22e123a5d3e8e4f8521675b898778c4d6219a605119c6490477f02b0a9",
+				"dweb:/ipfs/QmUbjRxcCQ1btX6xhsUMgCVV7sPCs4mG1AgmpGMgDhYvmf"
+			]
+		}
+	},
+	"version": 1
+}

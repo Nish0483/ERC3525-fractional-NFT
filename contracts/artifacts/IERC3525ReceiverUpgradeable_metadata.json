@@ -1,0 +1,105 @@
+{
+	"compiler": {
+		"version": "0.8.20+commit.a1b79de6"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_operator",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_fromTokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_toTokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_value",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC3525Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Interface for a smart contract that wants to be informed by EIP-3525 contracts when   receiving values from ANY addresses or EIP-3525 tokens. Note: the EIP-165 identifier for this interface is 0x009ce20b.",
+			"kind": "dev",
+			"methods": {
+				"onERC3525Received(address,uint256,uint256,uint256,bytes)": {
+					"details": "An EIP-3525 smart contract MUST check whether this function is implemented by the   recipient contract, if the recipient contract implements this function, the EIP-3525   contract MUST call this function after a value transfer (i.e. `transferFrom(uint256,  uint256,uint256,bytes)`).  MUST return 0x009ce20b (i.e. `bytes4(keccak256('onERC3525Received(address,uint256,uint256,  uint256,bytes)'))`) if the transfer is accepted.  MUST revert or return any value other than 0x009ce20b if the transfer is rejected.",
+					"params": {
+						"_data": "Additional data with no specified format",
+						"_fromTokenId": "The token id to transfer value from",
+						"_operator": "The address which triggered the transfer",
+						"_toTokenId": "The token id to transfer value to",
+						"_value": "The transferred value"
+					},
+					"returns": {
+						"_0": "`bytes4(keccak256('onERC3525Received(address,uint256,uint256,uint256,bytes)'))`   unless the transfer is rejected."
+					}
+				}
+			},
+			"title": "EIP-3525 token receiver interface",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"onERC3525Received(address,uint256,uint256,uint256,bytes)": {
+					"notice": "Handle the receipt of an EIP-3525 token value."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/IERC3525ReceiverUpgradeable.sol": "IERC3525ReceiverUpgradeable"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/IERC3525ReceiverUpgradeable.sol": {
+			"keccak256": "0x2a8ce467d124fa2edce6c5204f497acafd1e0dc8f62064c64795dac657a9ab07",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c9490dc3bcb3138b8e5e663e2981f26e214fcab9f9128c72112f25c96f82b76c",
+				"dweb:/ipfs/QmRq8VJts49WKEJGQY73PA9exg4z3UojZSvkBeVp8YgmVB"
+			]
+		}
+	},
+	"version": 1
+}

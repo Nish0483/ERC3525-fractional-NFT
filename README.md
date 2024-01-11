@@ -49,7 +49,7 @@ To understand why we need ERC-3525, here is a comparison with existing token sta
 
 ## Functions
 
-# Metadata Functions
+##### Metadata Functions
 
 * contractURI()
 Returns the URI for the entire token collection.
@@ -57,43 +57,51 @@ Returns the URI for the entire token collection.
 ~~~
 function contractURI() public view virtual override returns (string memory)
 ~~~
-slotURI(uint256 slot_)
-Returns the URI for a specific slot within the token collection.
 
-solidity
-Copy code
+* slotURI(uint256 slot_)
+Returns the URI for a specific slot within the token collection.
+~~~
 function slotURI(uint256 slot_) public view virtual override returns (string memory)
-tokenURI(uint256 tokenId_)
+~~~
+
+* tokenURI(uint256 tokenId_)
 Returns the URI for a specific token.
 
-solidity
-Copy code
+~~~
 function tokenURI(uint256 tokenId_) public view virtual override returns (string memory)
-Token Management Functions
-balanceOf(uint256 tokenId_)
+~~~
+
+#### Token Management Functions
+
+* balanceOf(uint256 tokenId_)
 Returns the balance (fractional value) associated with a specific token.
 
-solidity
-Copy code
+~~~
 function balanceOf(uint256 tokenId_) public view virtual override returns (uint256)
-ownerOf(uint256 tokenId_)
+~~~
+
+* ownerOf(uint256 tokenId_)
 Returns the owner of a specific token.
 
-solidity
-Copy code
+~~~
 function ownerOf(uint256 tokenId_) public view virtual override returns (address owner_)
-slotOf(uint256 tokenId_)
+~~~
+
+* slotOf(uint256 tokenId_)
 Returns the slot associated with a specific token.
 
-solidity
-Copy code
+~~~
 function slotOf(uint256 tokenId_) public view virtual override returns (uint256)
-transferFrom(uint256 fromTokenId_, address to_, uint256 value_)
+~~~
+
+* transferFrom(uint256 fromTokenId_, address to_, uint256 value_)
 Transfers a fractional value from one token to another.
 
-solidity
-Copy code
+~~~
 function transferFrom(uint256 fromTokenId_, address to_, uint256 value_) public payable virtual override returns (uint256 newTokenId)
+~~~
+
+
 transferFrom(uint256 fromTokenId_, uint256 toTokenId_, uint256 value_)
 Transfers a fractional value from one token to another.
 

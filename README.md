@@ -22,8 +22,26 @@ To understand why we need ERC-3525, here is a comparison with existing token sta
 
 * ERC-3525: maintains both features like ERC-20 and ERC-721. Tokens are non-fungible through slot and tokenId. And tokens can be very fungible with abilities to divide and merge. ERC-3525 solved the problems of ERC-1155 with trade-offs between ERC-721 and ERC-20.
 
-# Use Cases of ERC-3525
+### Use Cases of ERC-3525
 
 * DeFi: the nature of ERC-3525 is suitable and compatible to be used in financial instruments like bonds, insurance policies, vesting plans, mortgages, etc. The splitting and combining features allow people to quantify tokens and increase flexibility in asset management. Financial instruments usually have various attributes, for example, there are different types of bonds with different issuance dates, maturity dates, interest rates… With ERC-3525, bonds with the same attributes (slot) can be split or combined by value transfer. The same applies to other financial instruments.
   
 * GameFi: ERC-3525 can also be used to create and distribute virtual assets in games and metaverses. It can split gaming assets into smaller pieces. For example, a piece of virtual land can be split into pieces and owned by different guild members instead of held by one entity.
+
+
+# About contract
+
+* _name: The name of the token collection.
+* _symbol: The symbol of the token collection.
+* _decimals: The number of decimals for the fractional values.
+* _tokenIdGenerator: The generator for creating unique token IDs.
+* _approvedValues: Mapping of token IDs to approved values for specific addresses.
+* _allTokens: An array containing information about all tokens.
+* _allTokensIndex: Mapping of token IDs to their index in the _allTokens array.
+* _addressData: Mapping of addresses to their owned tokens and approvals.
+* metadataDescriptor: Instance of the metadata descriptor contract.
+
+#### Structs
+
+* TokenData: Represents the data associated with each token, including ID, slot, balance, owner, approved address, and value approvals.
+* AddressData: Represents data associated with each address, including owned tokens and approvals.

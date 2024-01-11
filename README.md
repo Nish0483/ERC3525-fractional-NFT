@@ -11,6 +11,8 @@ ERC-3525 extends the structure of ERC-721. Besides having tokenIds which differe
 * value: the amount of the assets. For example, a $100 bond can be divided into two $50 bonds. 100 and 50 can represent the value of the assets being held.
 The <ID, SLOT, VALUE> design allows quantitive operations like dividing, combining, transferring, and comparing the tokens within the same slot attribute. It is worth noting that ERC-3525 has backwards compatibility with ERC-721, which means ERC-3525 tokens can be used in all the infra that support ERC-721, and developers can switch to ERC-3525 without additional development.
 
+
+
 ### Why We Need ERC-3525
 To understand why we need ERC-3525, here is a comparison with existing token standards:
 
@@ -22,11 +24,15 @@ To understand why we need ERC-3525, here is a comparison with existing token sta
 
 * ERC-3525: maintains both features like ERC-20 and ERC-721. Tokens are non-fungible through slot and tokenId. And tokens can be very fungible with abilities to divide and merge. ERC-3525 solved the problems of ERC-1155 with trade-offs between ERC-721 and ERC-20.
 
+  
+
 ### Use Cases of ERC-3525
 
 * DeFi: the nature of ERC-3525 is suitable and compatible to be used in financial instruments like bonds, insurance policies, vesting plans, mortgages, etc. The splitting and combining features allow people to quantify tokens and increase flexibility in asset management. Financial instruments usually have various attributes, for example, there are different types of bonds with different issuance dates, maturity dates, interest rates… With ERC-3525, bonds with the same attributes (slot) can be split or combined by value transfer. The same applies to other financial instruments.
   
 * GameFi: ERC-3525 can also be used to create and distribute virtual assets in games and metaverses. It can split gaming assets into smaller pieces. For example, a piece of virtual land can be split into pieces and owned by different guild members instead of held by one entity.
+
+
 
 
 # About contract
@@ -41,56 +47,44 @@ To understand why we need ERC-3525, here is a comparison with existing token sta
 * _addressData: Mapping of addresses to their owned tokens and approvals.
 * metadataDescriptor: Instance of the metadata descriptor contract.
 
+  
+
 #### Structs
 
 * TokenData: Represents the data associated with each token, including ID, slot, balance, owner, approved address, and value approvals.
 * AddressData: Represents data associated with each address, including owned tokens and approvals.
 
 
+
+
 ## Functions
 
-##### Metadata Functions
 
-* contractURI()
-  
-Returns the URI for the entire token collection.
+* contractURI() : Returns the URI for the entire token collection.
 
 
-* slotURI(uint256 slot_)
-
-Returns the URI for a specific slot within the token collection.
+* slotURI(uint256 slot_) : Returns the URI for a specific slot within the token collection.
 
 
-* tokenURI(uint256 tokenId_)
-
-Returns the URI for a specific token.
+* tokenURI(uint256 tokenId_)  : Returns the URI for a specific token.
 
 
-
-#### Token Management Functions
-
-* balanceOf(uint256 tokenId_)
-
-Returns the balance (fractional value) associated with a specific token.
+* balanceOf(uint256 tokenId_) : Returns the balance (fractional value) associated with a specific token.
 
 
-* ownerOf(uint256 tokenId_)
-
-Returns the owner of a specific token.
+* ownerOf(uint256 tokenId_)  : Returns the owner of a specific token.
 
 
-
-* slotOf(uint256 tokenId_)
-
-Returns the slot associated with a specific token ID.
+* slotOf(uint256 tokenId_) : Returns the slot associated with a specific token ID.
 
 
 * transferFrom
 
- there are 3 TransfersFrom functions  
- 1 . fractional value from one id to adress.
- 2 . id to id
- 3 . Adress to adress
+ there are 3 TransfersFrom functions 
+ 
+       1 . fractional value from one id to adress.
+       2 . id to id
+       3 . Adress to adress
 
 
 

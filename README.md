@@ -159,25 +159,28 @@ To understand why we need ERC-3525, here is a comparison with existing token sta
 <br>
 <br>
 
+<br>
+<br>
 
-
-*  ` _mint(address to_, uint256 slot_, uint256 value_) ` :  Internal function to mint a new token with a specific slot and value.
+*   _mint(address to_, uint256 slot_, uint256 value_)  :  Internal function to mint a new token with a specific slot and value.
 
 ~~~solidity
 function _mint(address to_, uint256 slot_, uint256 value_) public virtual returns (uint256 tokenId)
 ~~~
 
+<br>
+<br>
 
-
-    * _mintValue(uint256 tokenId_, uint256 value_) : Internal function to update the fractional value of a specific token.
+* _mintValue(uint256 tokenId_, uint256 value_) :  Internal function to update the fractional value of a specific token.
 
 
 ~~~solidity
 function _mintValue(uint256 tokenId_, uint256 value_) public virtual
 ~~~
+<br>
+<br>
 
 
-
-    * _mintToken(address to_, uint256 tokenId_, uint256 slot_)
+* _mintToken(address to_, uint256 tokenId_, uint256 slot_)
   
 Internal function to mint a new token with specific ID and slot.
